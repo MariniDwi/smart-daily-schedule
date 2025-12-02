@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Daily Scheduler</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1>Smart Daily Scheduler</h1>
+      <p class="subtitle">Penjadwal kegiatan harian berbasis rule-based AI</p>
+    </header>
+
+    <section class="card">
+      <h2>Input Tugas</h2>
+      <form id="taskForm" novalidate>
+        <div class="grid">
+          <div class="form-group">
+            <label for="taskName">Nama Tugas<span class="req">*</span></label>
+            <input type="text" id="taskName" required placeholder="Contoh: Menulis laporan" />
+            <small class="error" id="taskNameError"></small>
+          </div>
+          <div class="form-group">
+            <label for="duration">Durasi (menit)<span class="req">*</span></label>
+            <input type="number" id="duration" min="1" required placeholder="Misal 45" />
+            <small class="error" id="durationError"></small>
+          </div>
+          <div class="form-group">
+            <label for="deadline">Deadline (opsional)</label>
+            <input type="date" id="deadline" />
+            <small class="hint">Kosongkan jika tidak ada.</small>
+          </div>
+          <div class="form-group">
+            <label for="difficulty">Tingkat Kesulitan (1–3)<span class="req">*</span></label>
+            <select id="difficulty" required>
+              <option value="1">1 (mudah)</option>
+              <option value="2">2 (sedang)</option>
+              <option value="3">3 (sulit)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="manualPriority">Prioritas Manual (1–3, opsional)</label>
+            <input type="number" id="manualPriority" min="1" max="3" placeholder="Misal 2" />
+            <small class="hint">Jika diisi, skor tambahan = nilai × 3.</small>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn primary">Tambah Tugas</button>
+          <button type="button" id="clearAll" class="btn danger outline">Hapus Semua</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="section-header">
+        <h2>Daftar Tugas</h2>
+        <button id="generateScheduleBtn" class="btn success">Generate Schedule</button>
+      </div>
+      <ul id="taskList" class="list"></ul>
+      <p id="emptyTasks" class="muted">Belum ada tugas. Tambahkan tugas di formulir di atas.</p>
+    </section>
+
+    <section class="card">
+      <h2>Jadwal Otomatis</h2>
+      <ul id="scheduleList" class="list"></ul>
+      <p id="emptySchedule" class="muted">Belum ada jadwal. Klik "Generate Schedule" untuk membuat jadwal mulai jam 08:00.</p>
+    </section>
+
+    <footer class="footer">
+      <small>Mulai otomatis dari jam 08:00 hari ini. Tugas > 60 menit disisipkan istirahat 10 menit.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
